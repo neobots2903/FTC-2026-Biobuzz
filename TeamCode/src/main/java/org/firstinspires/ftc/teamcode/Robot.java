@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.subsystems.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
 public class Robot {
+    // https://gm0.org/en/latest/docs/software/getting-started/common-hardware-components.html
     // public MecanumDrive drive;
     // public ArmSubsystem arm;
 

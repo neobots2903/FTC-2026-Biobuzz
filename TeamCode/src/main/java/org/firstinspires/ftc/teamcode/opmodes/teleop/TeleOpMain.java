@@ -1,7 +1,8 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import org.firstinspires.ftc.teamcode.Robot;
 
 @TeleOp(name = "Main TeleOp", group = "Competition")
 public class TeleOpMain extends LinearOpMode {
@@ -18,6 +19,7 @@ public class TeleOpMain extends LinearOpMode {
 
         while (opModeIsActive()) {
             // 1. Drive Control
+            // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html
             // robot.drive.driveCartesian(
             //     -gamepad1.left_stick_y,
             //      gamepad1.left_stick_x,
@@ -35,6 +37,7 @@ public class TeleOpMain extends LinearOpMode {
             // robot.update();
 
             // 4. Telemetry
+            // https://gm0.org/en/latest/docs/software/tutorials/using-telemetry.html
             // telemetry.addData("Arm State", robot.arm.getState());
             // telemetry.update();
         }

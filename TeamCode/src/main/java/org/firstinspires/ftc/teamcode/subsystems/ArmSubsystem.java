@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class ArmSubsystem {
+    // https://gm0.org/en/latest/docs/software/concepts/finite-state-machines.html
     public enum State { STOWED, SCORING, DROPPING }
 
     private final DcMotor armMotor;
