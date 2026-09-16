@@ -8,17 +8,17 @@ import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
 public class Robot {
     // https://gm0.org/en/latest/docs/software/getting-started/common-hardware-components.html
-    // public MecanumDrive drive;
+    public MecanumDrive drive;
     // public ArmSubsystem arm;
 
     public void init(HardwareMap hwMap) {
         // 1. Build MecanumDrive
-        // drive = new MecanumDrive(
-        //     hwMap.get(DcMotor.class, "front_left"),
-        //     hwMap.get(DcMotor.class, "back_left"),
-        //     hwMap.get(DcMotor.class, "front_right"),
-        //     hwMap.get(DcMotor.class, "back_right")
-        // );
+        drive = new MecanumDrive(
+             hwMap.get(DcMotor.class, "frontRight"),
+             hwMap.get(DcMotor.class, "backLeft"),
+             hwMap.get(DcMotor.class, "frontLeft"),
+             hwMap.get(DcMotor.class, "backRight")
+         );
 
         // 2. Build ArmSubsystem
         // arm = new ArmSubsystem(
