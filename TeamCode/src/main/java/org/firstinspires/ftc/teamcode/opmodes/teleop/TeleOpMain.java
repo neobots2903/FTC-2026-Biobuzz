@@ -18,7 +18,10 @@ public class TeleOpMain extends LinearOpMode {
         // waitForStart();
 
         while (opModeIsActive()) {
-            // 1. Drive Control
+            double y = controllerLeftStickY;
+            double yx = controllerLeftStickX
+            double x = controllerRightStickX;
+
             // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html
             // robot.drive.driveCartesian(
             //     -gamepad1.left_stick_y,

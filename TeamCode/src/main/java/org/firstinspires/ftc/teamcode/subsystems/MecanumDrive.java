@@ -16,5 +16,17 @@ public class MecanumDrive {
         frontLeft = fL;
         frontRight = fR;
     }
-    public void drive(){}
+    public void drive(double leftStickY, double leftStickX, double rightStickX) {
+        //Math for getting the power for the motors
+        double denominator = Math.max(Math.abs(leftStickY) + Math.abs(leftStickX) + Math.abs(rightStickX), 1);
+        double frontLeftPower = (leftStickY + leftStickX + rightStickX) / denominator;
+        double frontRightPower = (leftStickY - leftStickX - rightStickX) / denominator;
+        double backLeftPower = (leftStickY - leftStickX + rightStickX) / denominator;
+        double backRightPower = (leftStickY + leftStickX - rightStickX) / denominator;
+        //Getting the motors the values from the math above
+        backLeft.setPower(backLeftPower);
+        backRight.setPower(backRightPower);
+        frontLeft.setPower(frontLeftPower);
+        frontRight.setPower(frontRightPower);
+    }
 }
