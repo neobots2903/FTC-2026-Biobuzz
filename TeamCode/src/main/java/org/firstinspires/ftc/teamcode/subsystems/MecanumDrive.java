@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -16,11 +17,12 @@ public class MecanumDrive {
 
 
     public MecanumDrive (DcMotor fR, DcMotor bL, DcMotor fL, DcMotor bR, IMU imu){
-        backLeft = bR;
+        backLeft = bL;
         backRight = bR;
         frontLeft = fL;
         frontRight = fR;
-        imu = imu;
+        this.imu = imu;
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }
     public void yawReset(){
         imu.resetYaw();

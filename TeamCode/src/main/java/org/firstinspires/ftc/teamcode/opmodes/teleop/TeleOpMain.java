@@ -10,7 +10,7 @@ public class TeleOpMain extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        // robot.init(hardwareMap);
+         robot.init(hardwareMap);
 
         // telemetry.addData("Status", "Initialized");
         // telemetry.update();
@@ -18,6 +18,9 @@ public class TeleOpMain extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            if (gamepad1.options){
+                robot.drive.yawReset();
+            }
 
             robot.drive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
