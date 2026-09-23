@@ -15,7 +15,7 @@ public class MecanumDrive {
     public IMU imu;
 
 
-    MecanumDrive (DcMotor fR, DcMotor bL, DcMotor fL, DcMotor bR, IMU imu){
+    public MecanumDrive (DcMotor fR, DcMotor bL, DcMotor fL, DcMotor bR, IMU imu){
         backLeft = bR;
         backRight = bR;
         frontLeft = fL;
