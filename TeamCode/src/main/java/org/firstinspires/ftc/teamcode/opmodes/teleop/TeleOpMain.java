@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.Robot;
 
 @TeleOp(name = "Main TeleOp", group = "Competition")
 public class TeleOpMain extends LinearOpMode {
-    // private final Robot robot = new Robot();
+    private final Robot robot = new Robot();
 
     @Override
     public void runOpMode() {
@@ -15,13 +15,11 @@ public class TeleOpMain extends LinearOpMode {
         // telemetry.addData("Status", "Initialized");
         // telemetry.update();
 
-        // waitForStart();
+        waitForStart();
 
         while (opModeIsActive()) {
-            double y = controllerLeftStickY;
-            double yx = controllerLeftStickX
-            double x = controllerRightStickX;
-            
+
+            robot.drive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
             // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html
             // robot.drive.driveCartesian(

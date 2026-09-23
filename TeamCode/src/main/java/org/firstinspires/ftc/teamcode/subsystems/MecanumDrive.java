@@ -22,7 +22,9 @@ public class MecanumDrive {
         frontRight = fR;
         imu = imu;
     }
-
+    public void yawReset(){
+        imu.resetYaw();
+    };
     public void drive(double leftStickY, double leftStickX, double rightStickX) {
         //Getting angle
         double direction = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
