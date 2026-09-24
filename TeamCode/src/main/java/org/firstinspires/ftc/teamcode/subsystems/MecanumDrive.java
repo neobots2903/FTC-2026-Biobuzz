@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
@@ -22,6 +23,9 @@ public class MecanumDrive {
         frontLeft = fL;
         frontRight = fR;
         this.imu = imu;
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }
     public void yawReset(){
@@ -31,8 +35,8 @@ public class MecanumDrive {
         //Getting angle
         double direction = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
         //rotating the movement counter to the bot rotating
-        double rotX = leftStickX * Math.cos(-direction) - leftStickY * Math.sin(-direction);
-        double rotY = leftStickX * Math.sin(-direction) + leftStickY * Math.cos(-direction);
+        double rotX = leftStickX * Math.cos(direction) - leftStickY * Math.sin(direction);
+        double rotY = leftStickX * Math.sin(direction) + leftStickY * Math.cos(direction);
         //Math for getting the power for the motors
         double denominator = Math.max(Math.abs(leftStickY) + Math.abs(leftStickX) + Math.abs(rightStickX), 1);
         double frontLeftPower = (rotY + rotX + rightStickX) / denominator;
