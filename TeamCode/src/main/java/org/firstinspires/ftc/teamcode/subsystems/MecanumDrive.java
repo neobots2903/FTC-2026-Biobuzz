@@ -35,7 +35,7 @@ public class MecanumDrive {
         //Getting angle
         double direction = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
         //rotating the movement counter to the bot rotating
-        double rotX = leftStickX * Math.cos(direction) - leftStickY * Math.sin(direction);
+        double rotX = -leftStickX * Math.cos(direction) - leftStickY * Math.sin(direction);
         double rotY = leftStickX * Math.sin(direction) + leftStickY * Math.cos(direction);
         //Math for getting the power for the motors
         double denominator = Math.max(Math.abs(leftStickY) + Math.abs(leftStickX) + Math.abs(rightStickX), 1);
@@ -43,7 +43,7 @@ public class MecanumDrive {
         double frontRightPower = (rotY - rotX - rightStickX) / denominator;
         double backLeftPower = (rotY - rotX + rightStickX) / denominator;
         double backRightPower = (rotY + rotX - rightStickX) / denominator;
-        //Getting the motors the values from the math above
+        //Getting power to motors
         backLeft.setPower(backLeftPower);
         backRight.setPower(backRightPower);
         frontLeft.setPower(frontLeftPower);
