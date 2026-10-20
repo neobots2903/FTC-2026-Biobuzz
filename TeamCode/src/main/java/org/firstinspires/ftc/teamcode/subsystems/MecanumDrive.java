@@ -25,8 +25,7 @@ public class MecanumDrive {
         this.imu = imu;
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT));
     }
     public void yawReset(){
         imu.resetYaw();

@@ -23,7 +23,15 @@ public class TeleOpMain extends LinearOpMode {
             }
 
             robot.drive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-
+            while (gamepad1.a){
+                robot.intake.spin(1.0);
+            }
+            while (gamepad1.x){
+                robot.intake.spin(-1.0);
+            }   
+            if (gamepad1.aWasReleased()||gamepad1.xWasReleased()){
+                robot.intake.spin(0.0);
+            }
             // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html
             // robot.drive.driveCartesian(
             //     -gamepad1.left_stick_y,
