@@ -32,6 +32,15 @@ public class TeleOpMain extends LinearOpMode {
             if (gamepad1.aWasReleased()||gamepad1.xWasReleased()){
                 robot.intake.spin(0.0);
             }
+            robot.shooter.shooterSpin(gamepad2.right_trigger);
+            if (gamepad2.a){
+                robot.shooter.shooterMove(0.25);
+                //we gotta find the numbers later
+            }
+            if (gamepad2.x){
+                robot.shooter.shooterMove(0.75);
+                // find the numbers later
+            }
             // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html
             // robot.drive.driveCartesian(
             //     -gamepad1.left_stick_y,
