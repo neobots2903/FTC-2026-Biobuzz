@@ -39,6 +39,7 @@ public class Robot {
             hwMap.get(DcMotor.class, "shooterMotor"),
             hwMap.get(Servo.class, "shooterServo")
         );
+
         // 2. Build ArmSubsystem
         // arm = new ArmSubsystem(
         //     hwMap.get(DcMotor.class, "arm_motor"),
@@ -51,4 +52,5 @@ public class Robot {
     //     drive.update();
     //     arm.update();
     // }
+
 }

@@ -62,6 +62,9 @@ public class TeleOpMain extends LinearOpMode {
             // https://gm0.org/en/latest/docs/software/tutorials/using-telemetry.html
             // telemetry.addData("Arm State", robot.arm.getState());
             // telemetry.update();
+            double shooterSpeed = robot.shooter.getShooterSpeed();
+            telemetry.addLine(Double.toString(shooterSpeed));
+            telemetry.update();
         }
     }
 }
