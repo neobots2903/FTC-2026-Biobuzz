@@ -16,7 +16,46 @@ public class MecanumDrive {
     DcMotor frontRight;
     public IMU imu;
 
-
+    double autoDriveMath = (28.0 * 12.0)/(3.0 * Math.PI);
+    public void inchesToTicks(double inches){
+        int autoDrivingTicks = (int) Math.round(autoDriveMath * inches);
+        backLeft.setTargetPosition(backLeft.getCurrentPosition() + autoDrivingTicks);
+        backRight.setTargetPosition(backRight.getCurrentPosition() + autoDrivingTicks);
+        frontLeft.setTargetPosition(frontLeft.getCurrentPosition() + autoDrivingTicks);
+        frontRight.setTargetPosition(frontRight.getCurrentPosition() + autoDrivingTicks);
+        commonThings();
+    }
+    public void leftAndRight(double inches){
+        int autoDrivingTicks = (int) Math.round(autoDriveMath * inches);
+        backLeft.setTargetPosition(backLeft.getCurrentPosition() - autoDrivingTicks);
+        backRight.setTargetPosition(backRight.getCurrentPosition() - autoDrivingTicks);
+        frontLeft.setTargetPosition(frontLeft.getCurrentPosition() - autoDrivingTicks);
+        frontRight.setTargetPosition(frontRight.getCurrentPosition() - autoDrivingTicks);
+        commonThings();
+    }
+    public void commonThings(){
+        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeft.setPower(0.5);
+        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRight.setPower(0.5);
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeft.setPower(0.5);
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRight.setPower(0.5);
+    }
+    public void stop(){
+        backLeft.setPower(0.0);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setPower(0.0);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeft.setPower(0.0);
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRight.setPower(0.0);
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+    public boolean areWeDone(){
+        return backLeft.isBusy() || backRight.isBusy() || frontRight.isBusy() || frontLeft.isBusy();
+    }
     public MecanumDrive (DcMotor fR, DcMotor bL, DcMotor fL, DcMotor bR, IMU imu){
         backLeft = bL;
         backRight = bR;
@@ -48,4 +87,5 @@ public class MecanumDrive {
         frontLeft.setPower(frontLeftPower);
         frontRight.setPower(frontRightPower);
     }
+
 }

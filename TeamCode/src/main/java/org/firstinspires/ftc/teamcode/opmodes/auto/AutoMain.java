@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
 @Autonomous(name = "Main Auto", group = "Competition")
 public class AutoMain extends LinearOpMode {
-    // private final Robot robot = new Robot();
+    /// private final Robot robot = new Robot();
 
     // Example autonomous routine steps
     // private enum AutoStep {
