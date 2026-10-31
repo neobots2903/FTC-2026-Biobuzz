@@ -15,4 +15,5 @@ public class Intake {
     public void spin(double power) {
         intakeMotor.setPower(power);
     }
+    public int intakeRPM;
 }

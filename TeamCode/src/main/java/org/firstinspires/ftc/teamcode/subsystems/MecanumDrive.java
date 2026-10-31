@@ -18,9 +18,9 @@ public class MecanumDrive {
 
 
     public MecanumDrive (DcMotor fR, DcMotor bL, DcMotor fL, DcMotor bR, IMU imu){
-        backLeft = bL;
+        backLeft = fL;
         backRight = bR;
-        frontLeft = fL;
+        frontLeft = bL;
         frontRight = fR;
         this.imu = imu;
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
