@@ -33,12 +33,12 @@ public class TeleOpMain extends LinearOpMode {
                 robot.shooter.spin(0.0);
             }
             robot.shooter.shooterSpin(gamepad2.right_trigger);
-            if (gamepad2.a){
+            if (gamepad2.b){
                 robot.shooter.shooterMove(0.25);
                 //we gotta find the numbers later
             }
-            if (gamepad2.x){
-                robot.shooter.shooterMove(0.75);
+            if (gamepad2.y){
+                robot.shooter.shooterMove(0.65);
                 // find the numbers later
             }
             // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html
