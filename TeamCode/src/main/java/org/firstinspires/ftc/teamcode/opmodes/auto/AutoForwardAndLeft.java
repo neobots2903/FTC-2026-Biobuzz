@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Robot;
 
-@Autonomous(name = "Main Auto", group = "Competition")
+@Autonomous(name = "AutoForwardAndLeft", group = "Competition")
 public class AutoForwardAndLeft extends LinearOpMode {
     private final Robot robot = new Robot();
 // blue auto 1 is 80 inches forward
@@ -20,9 +20,12 @@ public class AutoForwardAndLeft extends LinearOpMode {
         waitForStart();
         robot.drive.leftAndRight(3.0);
         while (robot.drive.areWeDone()){
-           idle();
+            idle();
         }
-        robot.drive.inchesToTicks(80.0);
+        robot.drive.inchesToTicks(-80.0);
+        while (robot.drive.areWeDone()){
+            idle();
+        }
     }
 }
 
