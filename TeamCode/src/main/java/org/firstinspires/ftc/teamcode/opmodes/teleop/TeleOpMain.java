@@ -22,9 +22,9 @@ public class TeleOpMain extends LinearOpMode {
                 robot.drive.yawReset();
             }
 
-            robot.drive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, -gamepad1.right_stick_x);
+            robot.drive.drive(gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x);
             if (gamepad2.a){
-                robot.shooter.spin(1.0);
+                robot.intake.spin(1.0);
             }
             if (gamepad2.x){
                 robot.shooter.spin(-1.0);
