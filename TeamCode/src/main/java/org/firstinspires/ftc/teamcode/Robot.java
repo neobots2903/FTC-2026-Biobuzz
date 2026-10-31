@@ -1,20 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDrive;
-import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
 public class Robot {
     // https://gm0.org/en/latest/docs/software/getting-started/common-hardware-components.html
     public MecanumDrive drive;
     // public ArmSubsystem arm;
-    public Intake intake;
 
     public Shooter shooter;
 
@@ -29,17 +28,17 @@ public class Robot {
              hwMap.get(IMU.class, "imu")
          );
         //Build in teleop later `
-        intake = new Intake(
 
-                hwMap.get(DcMotor.class, "intakeMotor"),
-                hwMap.get(Servo.class, "intakeFlywheel")
-                );
 
         shooter = new Shooter(
 
-            hwMap.get(DcMotor.class, "shooterMotor"),
-            hwMap.get(Servo.class, "shooterServo")
+            hwMap.get(DcMotorEx.class, "shooterMotor"),
+            hwMap.get(DcMotor.class, "intakeMotor"),
+            hwMap.get(Servo.class, "shooterServo"),
+            hwMap.get(CRServo.class, "intakeFlywheel")
         );
+
+
 
         // 2. Build ArmSubsystem
         // arm = new ArmSubsystem(
