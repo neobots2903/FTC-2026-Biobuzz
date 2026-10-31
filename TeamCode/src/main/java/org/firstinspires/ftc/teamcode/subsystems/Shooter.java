@@ -28,7 +28,7 @@ public class Shooter {
         this.vroom = vroom;
         shooterMotor.setPower(vroom);
         if (getRPM()>2000){
-            intakeFlywheel.setPower(1.0);
+            intakeFlywheel.setPower(-1.0);
         } else {
             intakeFlywheel.setPower(0.0);
         }
