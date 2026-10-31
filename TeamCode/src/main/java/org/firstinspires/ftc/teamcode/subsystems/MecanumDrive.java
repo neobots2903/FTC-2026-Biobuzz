@@ -57,9 +57,9 @@ public class MecanumDrive {
         return backLeft.isBusy() || backRight.isBusy() || frontRight.isBusy() || frontLeft.isBusy();
     }
     public MecanumDrive (DcMotor fR, DcMotor bL, DcMotor fL, DcMotor bR, IMU imu){
-        backLeft = bL;
+        backLeft = bL; // fl
         backRight = bR;
-        frontLeft = fL;
+        frontLeft = fL; // bl
         frontRight = fR;
         this.imu = imu;
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
@@ -74,14 +74,14 @@ public class MecanumDrive {
         //Getting angle
         double direction = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
         //rotating the movement counter to the bot rotating
-        double rotX = -leftStickX * Math.cos(direction) - leftStickY * Math.sin(direction);
-        double rotY = leftStickX * Math.sin(direction) + leftStickY * Math.cos(direction);
+        double rotX = leftStickX * Math.cos(-direction) - leftStickY * Math.sin(-direction);
+        double rotY = leftStickX * Math.sin(-direction) + leftStickY * Math.cos(-direction);
         //Math for getting the power for the motors
-        double denominator = Math.max(Math.abs(leftStickY) + Math.abs(leftStickX) + Math.abs(rightStickX), 1);
+        double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rightStickX), 1);
         double frontLeftPower = (rotY + rotX + rightStickX) / denominator;
         double frontRightPower = (rotY - rotX - rightStickX) / denominator;
-        double backLeftPower = 0.8 * (rotY - rotX + rightStickX) / denominator;
-        double backRightPower = 0.8 * (rotY + rotX - rightStickX) / denominator;
+        double backLeftPower = (rotY - rotX + rightStickX) / denominator;
+        double backRightPower = (rotY + rotX - rightStickX) / denominator;
         //Getting power to motors
         backLeft.setPower(backLeftPower);
         backRight.setPower(backRightPower);

@@ -22,7 +22,7 @@ public class AutoForwardAndLeft extends LinearOpMode {
         while (robot.drive.areWeDone()){
             idle();
         }
-        robot.drive.inchesToTicks(-80.0);
+        robot.drive.inchesToTicks(-23.0);
         while (robot.drive.areWeDone()){
             idle();
         }
