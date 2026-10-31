@@ -31,7 +31,8 @@ public class Robot {
         //Build in teleop later `
         intake = new Intake(
 
-                hwMap.get(DcMotor.class, "intakeMotor")
+                hwMap.get(DcMotor.class, "intakeMotor"),
+                hwMap.get(Servo.class, "intakeFlywheel")
                 );
 
         shooter = new Shooter(
