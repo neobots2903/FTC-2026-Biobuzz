@@ -29,7 +29,7 @@ public class TeleOpMain extends LinearOpMode {
             if (gamepad2.x){
                 robot.shooter.spin(-1.0);
             }
-            if (gamepad1.aWasReleased()||gamepad1.xWasReleased()){
+            if (gamepad2.aWasReleased()||gamepad2.xWasReleased()){
                 robot.shooter.spin(0.0);
             }
             robot.shooter.shooterSpin(gamepad2.right_trigger);

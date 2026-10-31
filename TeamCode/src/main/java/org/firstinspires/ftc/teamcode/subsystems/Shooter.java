@@ -29,7 +29,10 @@ public class Shooter {
         shooterMotor.setPower(vroom);
         if (getRPM()>2000){
             intakeFlywheel.setPower(1.0);
+        } else {
+            intakeFlywheel.setPower(0.0);
         }
+
     };
     public void shooterMove(double move){
         shooterServo.setPosition(move);
