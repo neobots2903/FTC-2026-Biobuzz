@@ -80,8 +80,8 @@ public class MecanumDrive {
         double denominator = Math.max(Math.abs(leftStickY) + Math.abs(leftStickX) + Math.abs(rightStickX), 1);
         double frontLeftPower = (rotY + rotX + rightStickX) / denominator;
         double frontRightPower = (rotY - rotX - rightStickX) / denominator;
-        double backLeftPower = (rotY - rotX + rightStickX) / denominator;
-        double backRightPower = (rotY + rotX - rightStickX) / denominator;
+        double backLeftPower = 0.8 * (rotY - rotX + rightStickX) / denominator;
+        double backRightPower = 0.8 * (rotY + rotX - rightStickX) / denominator;
         //Getting power to motors
         backLeft.setPower(backLeftPower);
         backRight.setPower(backRightPower);
