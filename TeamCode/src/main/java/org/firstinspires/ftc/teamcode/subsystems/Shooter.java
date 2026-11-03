@@ -24,14 +24,17 @@ public class Shooter {
         intakeMotor = iMotor;
         intakeFlywheel = iServo;
     }
+    public void indexSpin(double indexSpeed){
+        intakeFlywheel.setPower(indexSpeed);
+    }
     public void shooterSpin(double vroom){
         this.vroom = vroom;
         shooterMotor.setPower(vroom);
-        if (getRPM()>2000){
+        /*if (getRPM()>1000){
             intakeFlywheel.setPower(-1.0);
         } else {
             intakeFlywheel.setPower(0.0);
-        }
+        }*/
 
     };
     public void shooterMove(double move){
