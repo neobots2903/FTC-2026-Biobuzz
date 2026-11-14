@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Robot;
 
-@TeleOp(name = "Main TeleOp", group = "Competition")
+@TeleOp(name = "Vision Testing", group = "Competition")
 public class TeleOpSub extends LinearOpMode {
     private final Robot robot = new Robot();
 
