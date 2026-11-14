@@ -32,7 +32,7 @@ public class TeleOpMain extends LinearOpMode {
             if (gamepad2.aWasReleased()||gamepad2.xWasReleased()){
                 robot.shooter.spin(0.0);
             }
-            robot.shooter.shooterSpin(0.78 * gamepad2.right_trigger);
+            robot.shooter.shooterSpin(gamepad2.right_trigger);
             if (gamepad2.b){
                 robot.shooter.shooterMove(0.25);
                 //we gotta find the numbers later
@@ -43,9 +43,11 @@ public class TeleOpMain extends LinearOpMode {
             }
             if (gamepad2.left_trigger_pressed){
                 robot.shooter.indexSpin(-1.0);
+                robot.shooter.shooterState();
             }
             if (gamepad2.leftTriggerWasReleased()){
                 robot.shooter.indexSpin(0.0);
+                robot.shooter.shooterState();
             }
             // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html
             // robot.drive.driveCartesian(
