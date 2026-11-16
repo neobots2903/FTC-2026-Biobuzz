@@ -18,21 +18,26 @@ public class TeleOpMain extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            //Resets forward to where ever the robot is facing
             if (gamepad1.options){
                 robot.drive.yawReset();
             }
-
+            //Drive function
             robot.drive.drive(gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x);
+            //These 2 spin the intake
             if (gamepad2.a){
                 robot.shooter.spin(1.0);
             }
             if (gamepad2.x){
                 robot.shooter.spin(-1.0);
             }
+            //If spin intake button is released, spot spinning intake
             if (gamepad2.aWasReleased()||gamepad2.xWasReleased()){
                 robot.shooter.spin(0.0);
             }
+            //Shooter control
             robot.shooter.shooterSpin(gamepad2.right_trigger);
+            //These 2 set position for shooter
             if (gamepad2.b){
                 robot.shooter.shooterMove(0.25);
                 //we gotta find the numbers later
@@ -41,10 +46,12 @@ public class TeleOpMain extends LinearOpMode {
                 robot.shooter.shooterMove(0.65);
                 // find the numbers later
             }
+            //Spins index wheel
             if (gamepad2.left_trigger_pressed){
                 robot.shooter.indexSpin(-1.0);
                 robot.shooter.shooterState();
             }
+            //Stops index wheel
             if (gamepad2.leftTriggerWasReleased()){
                 robot.shooter.indexSpin(0.0);
                 robot.shooter.shooterState();
@@ -70,6 +77,7 @@ public class TeleOpMain extends LinearOpMode {
             // https://gm0.org/en/latest/docs/software/tutorials/using-telemetry.html
             // telemetry.addData("Arm State", robot.arm.getState());
             // telemetry.update();
+            //These show the shooter speed on the driver station
             double shooterSpeed = robot.shooter.getShooterSpeed();
             telemetry.addLine(Double.toString(shooterSpeed));
             telemetry.update();

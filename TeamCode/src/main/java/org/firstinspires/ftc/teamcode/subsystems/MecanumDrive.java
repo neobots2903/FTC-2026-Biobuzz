@@ -17,6 +17,7 @@ public class MecanumDrive {
     public IMU imu;
 
     double autoDriveMath = (28.0 * 12.0)/(3.0 * Math.PI);
+    //The function below is for going forward/backward in auto
     public void inchesToTicks(double inches){
         int autoDrivingTicks = (int) Math.round(autoDriveMath * inches);
         backLeft.setTargetPosition(backLeft.getCurrentPosition() + autoDrivingTicks);
@@ -25,6 +26,7 @@ public class MecanumDrive {
         frontRight.setTargetPosition(frontRight.getCurrentPosition() + autoDrivingTicks);
         commonThings();
     }
+    //The function below is for moving side to side in auto
     public void leftAndRight(double inches){
         int autoDrivingTicks = (int) Math.round(autoDriveMath * inches);
         backLeft.setTargetPosition(backLeft.getCurrentPosition() - autoDrivingTicks);
@@ -33,6 +35,7 @@ public class MecanumDrive {
         frontRight.setTargetPosition(frontRight.getCurrentPosition() - autoDrivingTicks);
         commonThings();
     }
+    //The function below is things
     public void commonThings(){
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeft.setPower(0.5);
@@ -43,6 +46,7 @@ public class MecanumDrive {
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRight.setPower(0.5);
     }
+    //Tells the robot to stop moving
     public void stop(){
         backLeft.setPower(0.0);
         backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -53,6 +57,7 @@ public class MecanumDrive {
         frontRight.setPower(0.0);
         frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
+    //Checks if the drive motors are running
     public boolean areWeDone(){
         return backLeft.isBusy() || backRight.isBusy() || frontRight.isBusy() || frontLeft.isBusy();
     }
