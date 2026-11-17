@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Robot;
 @TeleOp(name = "Vision Testing", group = "Competition")
 public class TeleOpSub extends LinearOpMode {
     private final Robot robot = new Robot();
-
+    private int testingRPM = 2000;
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
@@ -20,7 +20,18 @@ public class TeleOpSub extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            robot.Apriltag.telemetryAprilTag(telemetry);
+            if(gamepad1.right_trigger_pressed){
+                robot.shooter.shooterSpin(testingRPM);}
+            if(gamepad1.a){
+                this.testingRPM = testingRPM + 100;
+            }
+            if(gamepad1.b){
+                this.testingRPM = testingRPM - 100;
+            }
+            double shooterSpeed = robot.shooter.getRPM();
+            telemetry.addLine(String.format("\n==== (Shooter RPM: %d) ", robot.shooter.getRPM()));
+            telemetry.addLine(String.format("\n==== (Distance: %d)", robot.Apriltag.getDistanceFromHiveStructure()));
+            //robot.Apriltag.telemetryAprilTag(telemetry);
             telemetry.update();
             }
             // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html

@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import com.arcrobotics.ftclib.util.LUT;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
-import edu.wpi.first.math.interpolation;
+import com.arcrobotics.ftclib.util.InterpLUT;
 public class Shooter {
     double shooterPowah = 0.0;
     DcMotorEx shooterMotor;
@@ -16,8 +17,7 @@ public class Shooter {
     private final double nectarSpeed = 0.78;
     double shooterVelocity = 0;
     double shooterMotorTicks = 28;
-    Interpo
-
+    private InterpLUT distanceTable;
 ///Shooter motor has 28 encoder ticks and no gear reduction, shooter flywheel diameter is 3.5 inches
     public void spin(double power) {
         intakeMotor.setPower(power);
@@ -29,6 +29,10 @@ public class Shooter {
         shooterServo = sAdjuster;
         intakeMotor = iMotor;
         intakeFlywheel = iServo;
+        distanceTable.add(5.0,1000.0);
+        distanceTable.add(10.0,1500.0);
+        distanceTable.add(15.0,2000.0);
+        distanceTable.createLUT();
     }
     public void indexSpin(double indexSpeed){
         intakeFlywheel.setPower(indexSpeed);
@@ -67,5 +71,8 @@ public class Shooter {
         double shooterVelocity = (RPM / 60.0) * shooterMotorTicks;
         shooterMotor.setVelocity(shooterVelocity);
     }
-    public void shootingDistance
+    public double distanceToRPM(double distance){
+        return distanceTable.get(distance);
+
+    }
 }
