@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
-
+import edu.wpi.first.math.interpolation;
 public class Shooter {
     double shooterPowah = 0.0;
     DcMotorEx shooterMotor;
@@ -14,8 +14,11 @@ public class Shooter {
     private boolean pollenNectar = true; //pollen is true, nectar is false
     private final double pollenSpeed = 0.82;
     private final double nectarSpeed = 0.78;
+    double shooterVelocity = 0;
+    double shooterMotorTicks = 28;
+    Interpo
 
-
+///Shooter motor has 28 encoder ticks and no gear reduction, shooter flywheel diameter is 3.5 inches
     public void spin(double power) {
         intakeMotor.setPower(power);
     }
@@ -58,4 +61,11 @@ public class Shooter {
     public void shooterState(){
         this.pollenNectar = !pollenNectar;
     }
+    /*Function below calculates shooter ticks per second by dividing RPM by 60 seconds and
+    multiplies that result by 28, aka the shooter motor ticks per revoultion*/
+    public void setShooterRPM(int RPM){
+        double shooterVelocity = (RPM / 60.0) * shooterMotorTicks;
+        shooterMotor.setVelocity(shooterVelocity);
+    }
+    public void shootingDistance
 }

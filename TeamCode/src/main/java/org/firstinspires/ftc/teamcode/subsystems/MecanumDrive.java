@@ -16,6 +16,7 @@ public class MecanumDrive {
     DcMotor frontRight;
     public IMU imu;
 
+    /// 28 encoder ticks, gear reduction is 12
     double autoDriveMath = (28.0 * 12.0)/(3.0 * Math.PI);
     //The function below is for going forward/backward in auto
     public void inchesToTicks(double inches){
