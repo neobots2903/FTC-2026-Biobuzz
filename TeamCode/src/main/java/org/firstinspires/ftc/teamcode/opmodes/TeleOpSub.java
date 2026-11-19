@@ -21,7 +21,11 @@ public class TeleOpSub extends LinearOpMode {
 
         while (opModeIsActive()) {
             if(gamepad1.right_trigger_pressed){
-                robot.shooter.shooterSpin(testingRPM);}
+                robot.shooter.setShooterRPM(testingRPM);
+            } else {
+                robot.shooter.shooterSpin(0.0);
+            }
+
             if(gamepad1.a){
                 this.testingRPM = testingRPM + 100;
             }
@@ -30,7 +34,7 @@ public class TeleOpSub extends LinearOpMode {
             }
             double shooterSpeed = robot.shooter.getRPM();
             telemetry.addLine(String.format("\n==== (Shooter RPM: %d) ", robot.shooter.getRPM()));
-            telemetry.addLine(String.format("\n==== (Distance: %d)", robot.Apriltag.getDistanceFromHiveStructure()));
+            telemetry.addLine(String.format("\n==== (Distance: %.1f)", robot.Apriltag.getDistanceFromHiveStructure()));
             //robot.Apriltag.telemetryAprilTag(telemetry);
             telemetry.update();
             }

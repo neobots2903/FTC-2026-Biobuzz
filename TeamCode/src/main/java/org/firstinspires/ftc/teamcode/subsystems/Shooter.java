@@ -17,7 +17,7 @@ public class Shooter {
     private final double nectarSpeed = 0.78;
     double shooterVelocity = 0;
     double shooterMotorTicks = 28;
-    private InterpLUT distanceTable;
+    private final InterpLUT distanceTable =new InterpLUT();
 ///Shooter motor has 28 encoder ticks and no gear reduction, shooter flywheel diameter is 3.5 inches
     public void spin(double power) {
         intakeMotor.setPower(power);
@@ -39,6 +39,7 @@ public class Shooter {
     }
     public void shooterSpin(double rightTriggerValue){
         this.shooterPowah = rightTriggerValue;
+        shooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
        if (pollenNectar) {
            shooterMotor.setPower(rightTriggerValue * pollenSpeed);
        }
@@ -66,8 +67,9 @@ public class Shooter {
         this.pollenNectar = !pollenNectar;
     }
     /*Function below calculates shooter ticks per second by dividing RPM by 60 seconds and
-    multiplies that result by 28, aka the shooter motor ticks per revoultion*/
+    multiplies that result by 28, aka the shooter motor ticks per revolution*/
     public void setShooterRPM(int RPM){
+        shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         double shooterVelocity = (RPM / 60.0) * shooterMotorTicks;
         shooterMotor.setVelocity(shooterVelocity);
     }
