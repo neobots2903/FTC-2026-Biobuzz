@@ -18,7 +18,8 @@ public class MecanumDrive {
 
     /// 28 encoder ticks, gear reduction is 12
     double autoDriveMath = (28.0 * 12.0)/(3.0 * Math.PI);
-    //The function below is for going forward/backward in auto
+    /*The function below is for going forward/backward in auto, positive inches is forward,
+    negative inches is backwards*/
     public void inchesToTicks(double inches){
         int autoDrivingTicks = (int) Math.round(autoDriveMath * inches);
         backLeft.setTargetPosition(backLeft.getCurrentPosition() + autoDrivingTicks);
@@ -27,7 +28,10 @@ public class MecanumDrive {
         frontRight.setTargetPosition(frontRight.getCurrentPosition() + autoDrivingTicks);
         commonThings();
     }
-    //The function below is for moving side to side in auto
+    /*The function below is for moving side to side in auto, positive value for inches moves it to the right
+    and negative values for inches moves it to the left.
+     */
+
     public void leftAndRight(double inches){
         int autoDrivingTicks = (int) Math.round(autoDriveMath * inches);
         backLeft.setTargetPosition(backLeft.getCurrentPosition() - autoDrivingTicks);
@@ -36,7 +40,8 @@ public class MecanumDrive {
         frontRight.setTargetPosition(frontRight.getCurrentPosition() - autoDrivingTicks);
         commonThings();
     }
-    //The function below is things
+    /*The function below is things that could be taken out of the other auto driving functions
+    and become their own function for easier reading*/
     public void commonThings(){
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeft.setPower(0.5);

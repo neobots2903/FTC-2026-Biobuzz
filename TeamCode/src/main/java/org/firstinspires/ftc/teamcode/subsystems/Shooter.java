@@ -15,7 +15,7 @@ public class Shooter {
     private boolean pollenNectar = true; //pollen is true, nectar is false
     private final double pollenSpeed = 0.82;
     private final double nectarSpeed = 0.78;
-    double shooterVelocity = 0;
+    double shooterVelocitySetPoint = 0;
     double shooterMotorTicks = 28;
     private final InterpLUT distanceTable =new InterpLUT();
 ///Shooter motor has 28 encoder ticks and no gear reduction, shooter flywheel diameter is 3.5 inches
@@ -29,7 +29,7 @@ public class Shooter {
         shooterServo = sAdjuster;
         intakeMotor = iMotor;
         intakeFlywheel = iServo;
-        distanceTable.add(5.0,1000.0);
+        distanceTable.add(65.5,2500.0);
         distanceTable.add(10.0,1500.0);
         distanceTable.add(15.0,2000.0);
         distanceTable.createLUT();
@@ -62,13 +62,21 @@ public class Shooter {
     public int getRPM () {
         return (int)(shooterMotor.getVelocity() * 60) / 28;
     }
-
+    //Checks if shooter is at correct RPM
+    public boolean readyToShoot () {
+        if ((shooterVelocitySetPoint + 200) > getRPM() && getRPM() > (shooterVelocitySetPoint - 200)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public void shooterState(){
         this.pollenNectar = !pollenNectar;
     }
     /*Function below calculates shooter ticks per second by dividing RPM by 60 seconds and
     multiplies that result by 28, aka the shooter motor ticks per revolution*/
     public void setShooterRPM(int RPM){
+        shooterVelocitySetPoint = RPM;
         shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         double shooterVelocity = (RPM / 60.0) * shooterMotorTicks;
         shooterMotor.setVelocity(shooterVelocity);
@@ -76,5 +84,8 @@ public class Shooter {
     public double distanceToRPM(double distance){
         return distanceTable.get(distance);
 
+    }
+    public double getSetPoint(){
+        return shooterVelocitySetPoint;
     }
 }

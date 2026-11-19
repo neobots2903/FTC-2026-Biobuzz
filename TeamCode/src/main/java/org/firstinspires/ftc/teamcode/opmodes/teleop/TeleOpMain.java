@@ -37,10 +37,13 @@ public class TeleOpMain extends LinearOpMode {
             }
             //Shooter control
             //robot.shooter.shooterSpin(gamepad2.right_trigger);
+            //Shooting function
             if (gamepad2.right_trigger_pressed){
                 double distanceFromHive = robot.Apriltag.getDistanceFromHiveStructure();
                 double RPM = robot.shooter.distanceToRPM(distanceFromHive);
                 robot.shooter.setShooterRPM((int)RPM);
+            } else {
+                robot.shooter.setShooterRPM(0);
             }
             //These 2 set position for shooter
             if (gamepad2.b){
@@ -48,7 +51,7 @@ public class TeleOpMain extends LinearOpMode {
                 //we gotta find the numbers later
             }
             if (gamepad2.y){
-                robot.shooter.shooterMove(0.65);
+                robot.shooter.shooterMove(0.75);
                 // find the numbers later
             }
             //Spins index wheel
@@ -83,7 +86,7 @@ public class TeleOpMain extends LinearOpMode {
             // telemetry.addData("Arm State", robot.arm.getState());
             // telemetry.update();
             //These show the shooter speed on the driver station
-            double shooterSpeed = robot.shooter.getShooterSpeed();
+            double shooterSpeed = robot.shooter.getRPM();
 
             telemetry.addLine(Double.toString(shooterSpeed));
             telemetry.update();

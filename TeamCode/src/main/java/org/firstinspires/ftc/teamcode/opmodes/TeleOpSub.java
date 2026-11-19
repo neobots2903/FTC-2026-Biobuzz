@@ -20,22 +20,23 @@ public class TeleOpSub extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            robot.Apriltag.telemetryAprilTag(telemetry);
             if(gamepad1.right_trigger_pressed){
                 robot.shooter.setShooterRPM(testingRPM);
             } else {
                 robot.shooter.shooterSpin(0.0);
             }
 
-            if(gamepad1.a){
+            if(gamepad1.aWasPressed()){
                 this.testingRPM = testingRPM + 100;
             }
-            if(gamepad1.b){
+            if(gamepad1.bWasPressed()){
                 this.testingRPM = testingRPM - 100;
             }
             double shooterSpeed = robot.shooter.getRPM();
             telemetry.addLine(String.format("\n==== (Shooter RPM: %d) ", robot.shooter.getRPM()));
             telemetry.addLine(String.format("\n==== (Distance: %.1f)", robot.Apriltag.getDistanceFromHiveStructure()));
-            //robot.Apriltag.telemetryAprilTag(telemetry);
+            telemetry.addLine(String.format("\n==== (Set point RPM: %.1f) ", robot.shooter.getSetPoint()));
             telemetry.update();
             }
             // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html
@@ -59,6 +60,10 @@ public class TeleOpSub extends LinearOpMode {
             // https://gm0.org/en/latest/docs/software/tutorials/using-telemetry.html
             // telemetry.addData("Arm State", robot.arm.getState());
             // telemetry.update();
+        double shooterSpeed = robot.shooter.getRPM();
+
+        telemetry.addLine(Double.toString(shooterSpeed));
+        telemetry.update();
         }
     }
 
