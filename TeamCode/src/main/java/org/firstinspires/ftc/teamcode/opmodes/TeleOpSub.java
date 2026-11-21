@@ -21,10 +21,10 @@ public class TeleOpSub extends LinearOpMode {
 
         while (opModeIsActive()) {
             robot.Apriltag.telemetryAprilTag(telemetry);
-            if(gamepad1.right_trigger_pressed){
+            if(gamepad1.right_bumper){
                 robot.shooter.setShooterRPM(testingRPM);
             } else {
-                robot.shooter.shooterSpin(0.0);
+                robot.shooter.setShooterRPM(0);
             }
 
             if(gamepad1.aWasPressed()){
@@ -32,6 +32,14 @@ public class TeleOpSub extends LinearOpMode {
             }
             if(gamepad1.bWasPressed()){
                 this.testingRPM = testingRPM - 100;
+            }
+            if (gamepad1.b){
+                robot.shooter.shooterMove(0.25);
+                //we gotta find the numbers later
+            }
+            if (gamepad1.y){
+                robot.shooter.shooterMove(1.0);
+                // find the numbers later
             }
             double shooterSpeed = robot.shooter.getRPM();
             telemetry.addLine(String.format("\n==== (Shooter RPM: %d) ", robot.shooter.getRPM()));

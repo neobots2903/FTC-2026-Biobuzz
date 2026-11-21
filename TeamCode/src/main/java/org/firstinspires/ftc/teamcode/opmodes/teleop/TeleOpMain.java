@@ -19,6 +19,7 @@ public class TeleOpMain extends LinearOpMode {
 
         while (opModeIsActive()) {
             //Resets forward to where ever the robot is facing
+            robot.Apriltag.telemetryAprilTag(telemetry);
             if (gamepad1.options){
                 robot.drive.yawReset();
             }
@@ -36,14 +37,19 @@ public class TeleOpMain extends LinearOpMode {
                 robot.shooter.spin(0.0);
             }
             //Shooter control
-            //robot.shooter.shooterSpin(gamepad2.right_trigger);
+            robot.shooter.setShooterRPM((int)(3000.0 * gamepad2.right_trigger));
             //Shooting function
-            if (gamepad2.right_trigger_pressed){
+            if (gamepad2.right_bumper){
                 double distanceFromHive = robot.Apriltag.getDistanceFromHiveStructure();
                 double RPM = robot.shooter.distanceToRPM(distanceFromHive);
                 robot.shooter.setShooterRPM((int)RPM);
             } else {
-                robot.shooter.setShooterRPM(0);
+                robot.shooter.shooterStop();
+            }
+            if (robot.shooter.getRPM()>500){
+                robot.Apriltag.setEnabled(false);
+            } else {
+                robot.Apriltag.setEnabled(true);
             }
             //These 2 set position for shooter
             if (gamepad2.b){
@@ -51,18 +57,15 @@ public class TeleOpMain extends LinearOpMode {
                 //we gotta find the numbers later
             }
             if (gamepad2.y){
-                robot.shooter.shooterMove(0.75);
+                robot.shooter.shooterMove(1.0);
                 // find the numbers later
             }
             //Spins index wheel
             if (gamepad2.left_trigger_pressed){
                 robot.shooter.indexSpin(-1.0);
-                robot.shooter.shooterState();
-            }
-            //Stops index wheel
-            if (gamepad2.leftTriggerWasReleased()){
+                //robot.shooter.shooterState();
+            } else {
                 robot.shooter.indexSpin(0.0);
-                robot.shooter.shooterState();
             }
             // https://gm0.org/en/latest/docs/software/tutorials/gamepad.html
             // robot.drive.driveCartesian(
@@ -87,7 +90,9 @@ public class TeleOpMain extends LinearOpMode {
             // telemetry.update();
             //These show the shooter speed on the driver station
             double shooterSpeed = robot.shooter.getRPM();
-
+            telemetry.addLine(String.format("\n==== (Shooter RPM: %d) ", robot.shooter.getRPM()));
+            telemetry.addLine(String.format("\n==== (Distance: %.1f)", robot.Apriltag.getDistanceFromHiveStructure()));
+            telemetry.addLine(String.format("\n==== (Set point RPM: %.1f) ", robot.shooter.getSetPoint()));
             telemetry.addLine(Double.toString(shooterSpeed));
             telemetry.update();
         }

@@ -35,6 +35,7 @@ public class AprilTagSubsystem {
     /**
      * The variable to store our instance of the vision portal.
      */
+    public boolean enabled = true;
     public AprilTagSubsystem (CameraName vision) {
         this.vision = vision;
         initAprilTag(vision);
@@ -90,15 +91,18 @@ public class AprilTagSubsystem {
                 }
             }  else {*/
 
-                AprilTagClusterDetection clusterDet = (AprilTagClusterDetection) detection;
-                if (clusterDet.ftcPose.roll < 90 && clusterDet.ftcPose.roll > -90){
-                    closestYValue = clusterDet.ftcPose.y;
-                            /*telemetry.addLine(String.format("\n==== Tag Cluster (%s)", clusterDet.metadata.name));
-                    telemetry.addLine(String.format("Percent tags found: %d", clusterDet.percentClusterFound));
-                    telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z));
-                    telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detection.ftcPose.pitch, detection.ftcPose.roll, detection.ftcPose.yaw));
-                    telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (inch, deg, deg)", detection.ftcPose.range, detection.ftcPose.bearing, detection.ftcPose.elevation));
-                */}
+
+                if (detection instanceof AprilTagClusterDetection){
+                    AprilTagClusterDetection clusterDet = (AprilTagClusterDetection) detection;
+                    if (clusterDet.ftcPose.roll < 90 && clusterDet.ftcPose.roll > -90 && enabled){
+                        closestYValue = clusterDet.ftcPose.y;
+                                /*telemetry.addLine(String.format("\n==== Tag Cluster (%s)", clusterDet.metadata.name));
+                        telemetry.addLine(String.format("Percent tags found: %d", clusterDet.percentClusterFound));
+                        telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z));
+                        telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detection.ftcPose.pitch, detection.ftcPose.roll, detection.ftcPose.yaw));
+                        telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (inch, deg, deg)", detection.ftcPose.range, detection.ftcPose.bearing, detection.ftcPose.elevation));
+                    */}
+                }
 
             //}
         }   // end for() loop
@@ -111,6 +115,9 @@ public class AprilTagSubsystem {
     }   // end method telemetryAprilTag()
     public double getDistanceFromHiveStructure(){
         return this.closestYValue;
+    }
+    public void setEnabled(boolean newValue){
+    this.enabled = newValue;
     }
 
         //

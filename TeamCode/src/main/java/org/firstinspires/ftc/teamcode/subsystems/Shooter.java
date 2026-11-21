@@ -29,15 +29,18 @@ public class Shooter {
         shooterServo = sAdjuster;
         intakeMotor = iMotor;
         intakeFlywheel = iServo;
-        distanceTable.add(65.5,2500.0);
-        distanceTable.add(10.0,1500.0);
-        distanceTable.add(15.0,2000.0);
+        //P was 1.17
+        shooterMotor.setVelocityPIDFCoefficients(2.0,0.0,0.0,16.6);
+        shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        distanceTable.add(0.0, 1000);
+        distanceTable.add(55.4,2500.0);
+        distanceTable.add(64.0,2750.0);
+        distanceTable.add(75.0, 3000.0);
         distanceTable.createLUT();
     }
-    public void indexSpin(double indexSpeed){
-        intakeFlywheel.setPower(indexSpeed);
-    }
-    public void shooterSpin(double rightTriggerValue){
+    public void indexSpin(double indexSpeed){intakeFlywheel.setPower(indexSpeed);}
+    /*public void shooterSpin(double rightTriggerValue){
         this.shooterPowah = rightTriggerValue;
         shooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
        if (pollenNectar) {
@@ -45,14 +48,14 @@ public class Shooter {
        }
        else {
            shooterMotor.setPower(rightTriggerValue * nectarSpeed);
-       }
+       }*/
         /*if (getRPM()>1000){
             intakeFlywheel.setPower(-1.0);
         } else {
             intakeFlywheel.setPower(0.0);
-        }*/
+        }
 
-    };
+    };*/
     public void shooterMove(double move){
         shooterServo.setPosition(move);
     }
@@ -77,15 +80,21 @@ public class Shooter {
     multiplies that result by 28, aka the shooter motor ticks per revolution*/
     public void setShooterRPM(int RPM){
         shooterVelocitySetPoint = RPM;
-        shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         double shooterVelocity = (RPM / 60.0) * shooterMotorTicks;
         shooterMotor.setVelocity(shooterVelocity);
     }
     public double distanceToRPM(double distance){
-        return distanceTable.get(distance);
-
+        if (distance > 10.0 && distance < 65.5){
+            return distanceTable.get(distance);
+        }
+        return 0.0;
     }
     public double getSetPoint(){
         return shooterVelocitySetPoint;
     }
+    public void shooterStop(){
+        shooterMotor.setPower(0.0);
+        shooterVelocitySetPoint = 0.0;
+    }
 }
+
